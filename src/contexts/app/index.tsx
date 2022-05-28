@@ -14,20 +14,20 @@ export interface IAppContext {
   user: User | undefined;
   isAuthenticated: boolean;
   snackbarState: ISnackbarState;
-  setAuthentication: SetStateFunctionType;
   setSnackbarState: SetStateFunctionType;
+  logout: Function;
 }
 
 export const AppContext = React.createContext<IAppContext>({
   user: undefined,
   isAuthenticated: false,
   snackbarState: initialSnackbarState,
-  setAuthentication: () => {},
   setSnackbarState: (_: ISnackbarState) => {},
+  logout: () => {},
 });
 
 export default function AppProvider({ children }: any) {
-  const { user, isAuthenticated, setAuthentication } = useAuthHooks();
+  const { user, isAuthenticated, logout } = useAuthHooks();
   const { snackbarState, setSnackbarState, closeSnackbar } = useAppHooks();
 
   return (
@@ -36,8 +36,8 @@ export default function AppProvider({ children }: any) {
         user,
         isAuthenticated,
         snackbarState,
-        setAuthentication,
         setSnackbarState,
+        logout,
       }}
     >
       {children}

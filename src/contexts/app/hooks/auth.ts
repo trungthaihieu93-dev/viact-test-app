@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react';
 import { useQuery } from 'react-query';
+
 import { PROFILE_QUERY } from '../../../core/API/constants/query';
 import { User } from '../../../core/interfaces/user';
 import { getProfile } from '../../../services/user';
+import storage from '../../../utils/storage';
 
 const useAuthHooks = () => {
   const [isAuthenticated, setAuthentication] = useState(false);
@@ -16,10 +18,15 @@ const useAuthHooks = () => {
     }
   }, [user]);
 
+  const logout = () => {
+    storage.set('jwt', null);
+    setAuthentication(false);
+  };
+
   return {
     isAuthenticated,
     user,
-    setAuthentication,
+    logout,
   };
 };
 
