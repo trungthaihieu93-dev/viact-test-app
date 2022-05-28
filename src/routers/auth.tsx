@@ -1,5 +1,5 @@
 import React from 'react';
 
-export default function TextButton(props: any) {
+export default function AuthRoute() {
   return <div></div>;
 }
