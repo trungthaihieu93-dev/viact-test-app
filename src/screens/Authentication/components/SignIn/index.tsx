@@ -59,7 +59,7 @@ export default function SignIn(props: any) {
 
       const res = await signIn(signInForm);
 
-      storage.set('jwt', res.data.data.access_token);
+      storage.set('jwt', res.data.access_token);
 
       queryClient.invalidateQueries(PROFILE_QUERY);
 
