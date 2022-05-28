@@ -24,6 +24,7 @@ export default function CoreSnackbar(props: CoreSnackbarProps) {
 
   return (
     <Snackbar
+      anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
       open={isSnackbarShown}
       autoHideDuration={SNACKBAR_AUTOHIDE_TIME}
       onClose={onClose}

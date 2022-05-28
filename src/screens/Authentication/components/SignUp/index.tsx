@@ -12,11 +12,10 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 
-import { getPostReq } from '../../../../core/API';
-import { SIGN_UP_ENDPOINT } from '../../../../core/API/constants/url';
-import { FormDataFieldType } from '../../../../core/types/form';
-import { SIGN_UP_ROUTE_URL } from '../../../../routers/routes';
+import { SIGN_IN_ROUTE_URL } from '../../../../routers/routes';
 import { AppContext } from '../../../../contexts/app';
+import { SignUpForm } from '../../../../core/interfaces/auth';
+import { signUp } from '../../../../services/auth';
 
 import './styles.css';
 
@@ -36,14 +35,6 @@ function Copyright(props: any) {
       {'.'}
     </Typography>
   );
-}
-
-export interface SignUpForm {
-  email: FormDataFieldType;
-  password: FormDataFieldType;
-  username: FormDataFieldType;
-  firstName: FormDataFieldType;
-  lastName: FormDataFieldType;
 }
 
 export default function SignUp(props: any) {
@@ -66,9 +57,15 @@ export default function SignUp(props: any) {
         lastName: formData.get('lastName'),
       };
 
-      await getPostReq<SignUpForm>(SIGN_UP_ENDPOINT, signUpForm);
+      await signUp(signUpForm);
 
-      navigate(SIGN_UP_ROUTE_URL);
+      setSnackbarState({
+        isSnackbarShown: true,
+        snackbarMessage: 'Registered successfully',
+        snackbarSeverity: 'success',
+      });
+
+      navigate(SIGN_IN_ROUTE_URL);
     } catch (error) {
       setSnackbarState({
         isSnackbarShown: true,

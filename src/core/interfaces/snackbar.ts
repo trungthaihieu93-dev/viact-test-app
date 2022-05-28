@@ -1,9 +1,10 @@
+
 import { AlertColor } from '@mui/material';
 
 export const initialSnackbarState: ISnackbarState = {
   isSnackbarShown: false,
   snackbarMessage: '',
-  snackbarSeverity: 'success',
+  snackbarSeverity: 'info',
 };
 
 export interface ISnackbarState {

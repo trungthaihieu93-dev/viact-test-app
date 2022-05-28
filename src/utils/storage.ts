@@ -1,13 +1,13 @@
-export function set<T>(key: string, value: T) {
-  window?.localStorage.setItem(key, JSON.stringify(value));
+function set(key: string, value: string) {
+  window?.localStorage.setItem(key, value);
 }
 
-export function get(key: string) {
+function get(key: string) {
   const value = window?.localStorage.getItem(key);
 
-  if (value) {
-    return JSON.parse(value);
-  }
-
-  return null;
+  return value;
 }
+
+const storageFunctions = { set, get };
+
+export default storageFunctions;

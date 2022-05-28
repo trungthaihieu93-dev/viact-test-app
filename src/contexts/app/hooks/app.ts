@@ -10,7 +10,7 @@ const useAppHooks = () => {
     useState<ISnackbarState>(initialSnackbarState);
 
   const closeSnackbar = () => {
-    setSnackbarState(initialSnackbarState);
+    setSnackbarState((prevState) => ({ ...prevState, isSnackbarShown: false }));
   };
 
   return { snackbarState, setSnackbarState, closeSnackbar };

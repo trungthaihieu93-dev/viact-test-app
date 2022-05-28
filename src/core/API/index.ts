@@ -1,4 +1,4 @@
-import axios, { AxiosRequestConfig } from 'axios';
+import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import { API_BASE_URL, API_TIMEOUT } from '../../core/config/api';
 
@@ -11,23 +11,37 @@ export const getOptions = (
   moreOptions?: AxiosRequestConfig<any>
 ): AxiosRequestConfig<any> => ({
   headers: {
-    Authorization: window?.localStorage.getItem('jwt') || '',
+    Authorization: `Bearer ${window?.localStorage.getItem('jwt') || ''}`,
   },
   ...moreOptions,
 });
 
-export function getGetReq(url: string) {
-  return instance.get(url, getOptions());
+export function getGetReq<T>(
+  url: string,
+  options?: AxiosRequestConfig<any>
+): Promise<AxiosResponse<T>> {
+  return instance.get(url, getOptions(options));
 }
 
-export function getPostReq<T>(url: string, body: T) {
-  return instance.post(url, body, getOptions());
+export function getPostReq<T>(
+  url: string,
+  body: T,
+  options?: AxiosRequestConfig<any>
+): Promise<AxiosResponse> {
+  return instance.post(url, body, getOptions(options));
 }
 
-export function getPutReq<T>(url: string, body: T) {
-  return instance.put(url, body, getOptions());
+export function getPutReq<T>(
+  url: string,
+  body: T,
+  options?: AxiosRequestConfig<any>
+): Promise<AxiosResponse> {
+  return instance.put(url, body, getOptions(options));
 }
 
-export function getDeleteReq(url: string) {
-  return instance.delete(url, getOptions());
+export function getDeleteReq(
+  url: string,
+  options?: AxiosRequestConfig<any>
+): Promise<AxiosResponse> {
+  return instance.delete(url, getOptions(options));
 }
