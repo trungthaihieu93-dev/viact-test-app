@@ -1,15 +1,19 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import { SignIn, SignUp } from '../screens/Authentication';
 
+import { AppContext } from '../contexts/app';
+
 export default function AppRoute() {
-  const isAuthenticated = false;
+  const { isAuthenticated } = useContext(AppContext);
 
   return (
     <BrowserRouter>
       <Routes>
-        {isAuthenticated ? null : (
+        {isAuthenticated ? (
+          <Route path="profile" element={<div>Profile</div>} />
+        ) : (
           <>
             <Route path="sign-in" element={<SignIn />} />
             <Route path="sign-up" element={<SignUp />} />
